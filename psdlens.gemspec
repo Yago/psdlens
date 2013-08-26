@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'psdlens'
-  s.version     = '0.1.3'
+  s.version     = '0.1.4'
   s.date        = '2013-08-23'
   s.summary     = "PSD analyzer tool"
   s.description = "A simple tool to analyze Photoshop files directly command line"

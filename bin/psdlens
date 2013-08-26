@@ -163,8 +163,8 @@ Usage:            #{File.basename($0)} [path] [method]
   * meta          Display all informations like size, color mode or used fontString
   * text          Display text content from all PSD files and return font-family, font-size and color
   * font          Display only used font
-  * content       Display only text conent
-  * report        Create a complete json report for all PSD 
+  * content       Display only text content
+  * report        Create a complete json report for all PSD files 
 
 Example :         #{File.basename($0)} . meta
 
