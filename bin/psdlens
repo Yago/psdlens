@@ -90,6 +90,44 @@ def textReport(psdFiles)
   end
 end
 
+# Extract text content from PSD and display font-size, font-family and color
+def styleReport(psdFiles)
+  textData = Array.new
+
+  psdFiles.each do |psdFile|
+    name = File.basename(psdFile)
+    PSD.open(psdFile) do |psd|
+      puts "\n[ #{name} ] Text Report =================================== \n\n"
+      psd.layers.each do |layer|
+        textRaw = layer.adjustments[:type]
+        textString = textRaw.to_s()
+
+        fontRaw = layer.text
+        fontString = fontRaw.to_s()
+        fontstring = fontString.gsub!(':font=>{:name=>"', "spliter")
+        fontstring = fontString.gsub!('", :sizes=>[', "spliter")
+        fontstring = fontString.gsub!('], :colors=>[', "spliter")
+        fontstring = fontString.gsub!(';\ncolor: ', "spliter")
+        fontstring = fontString.gsub!(';"}, :left=>', "spliter")
+        fontArray = fontString.split("spliter")
+
+        fontName = fontArray[1].to_s()
+        fontSize = fontArray[2].to_s()
+        fontColor = fontArray[4].to_s()
+
+        if textString == ""
+        else
+          textData.push("#{fontName} | #{fontSize}px | #{fontColor}")
+        end
+      end
+    end
+    textDataClean = textData.uniq
+    textDataClean.each do |d|
+      puts d
+    end
+  end
+end
+
 
 # Extract text content from PSD
 def contentReport(psdFiles)
@@ -163,6 +201,7 @@ Usage:            #{File.basename($0)} [path] [method]
   * meta          Display all informations like size, color mode or used fontString
   * text          Display text content from all PSD files and return font-family, font-size and color
   * font          Display only used font
+  * style         Display font typologies
   * content       Display only text content
   * report        Create a complete json report for all PSD files 
 
@@ -203,6 +242,9 @@ when "meta"
 when "text"
   puts beginMessage
   textReport(psdFiles)
+when "style"
+  puts beginMessage
+  styleReport(psdFiles)
 when "content"
   puts beginMessage
   contentReport(psdFiles)

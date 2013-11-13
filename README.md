@@ -41,6 +41,7 @@ $ psdlens . meta
 * **meta** : Display all informations like size, color mode or used fontString
 * **text** : Display text content from all PSD files and return font-family, font-size and color
 * **font** : Display only used font
+* **style** : Display all font typologies
 * **content** : Display only text conent
 * **report** : Create a complete json report for all PSD
 
